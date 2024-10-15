@@ -162,7 +162,7 @@ SB4InitAPI.prototype.init = function () {
         this.SBContentWrapper.innerHTML = '<iframe id="SB4Content" frameborder="0"></iframe><div id="scaleOverlay" style="width:100%;height:100%;background:rgba(128,128,128,0.85);text-align:center;position:absolute;font-size:48pt;font-weight:bold;color:white;display: none;justify-content: center;align-items: center;flex-direction: column"></div>';
         this.iframe = document.getElementById('SB4Content');
         this.iframe.style['position'] = "absolute";
-        var sourceHead = heads + '<script src="app/global.js?bust=1.0.0.202404300805_1728836764731"></script><script data-main="main.js?bust=1.0.0.202404300805_1728836764731" src="lib/require.js?bust=1.0.0.202404300805_1728836764731"></script>\n';
+        var sourceHead = heads + '<script src="app/global.js?bust=1.0.0.202404300805_1728975676383"></script><script data-main="main.js?bust=1.0.0.202404300805_1728975676383" src="lib/require.js?bust=1.0.0.202404300805_1728975676383"></script>\n';
         this.iframe.contentWindow.document.open();
 
 
@@ -208,10 +208,10 @@ SB4InitAPI.prototype.init = function () {
 
         document.head.insertAdjacentHTML('beforeend', heads);
         var s1 = document.createElement('script');
-        s1.setAttribute('src', 'app/global.js?bust=1.0.0.202404300805_1728836764731');
+        s1.setAttribute('src', 'app/global.js?bust=1.0.0.202404300805_1728975676383');
         var s2 = document.createElement('script');
-        s2.setAttribute('data-main', 'main.js?bust=1.0.0.202404300805_1728836764731');
-        s2.setAttribute('src', 'lib/require.js?bust=1.0.0.202404300805_1728836764731');
+        s2.setAttribute('data-main', 'main.js?bust=1.0.0.202404300805_1728975676383');
+        s2.setAttribute('src', 'lib/require.js?bust=1.0.0.202404300805_1728975676383');
         document.head.appendChild(s1);
         document.head.appendChild(s2);
     }
@@ -771,7 +771,7 @@ if (typeof _ != 'function') {
     if(sbConfig["launchPath"]!=null && sbConfig["launchPath"]!=""){
          launchPath= sbConfig["launchPath"];
     }
-    underScoreScript.src = launchPath + 'lib/underscore-min.js?bust=1.0.0.202404300805_1728836764731';
+    underScoreScript.src = launchPath + 'lib/underscore-min.js?bust=1.0.0.202404300805_1728975676383';
     document.body.appendChild(underScoreScript);
 }else{
      new SB4InitAPI(sbWrapperId, sbConfig);

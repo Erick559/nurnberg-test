@@ -69,6 +69,66 @@ define([], function () {
         alert('Failed to generate PDF. Please try again later.');
     }
   };
+
+  SB4API.functions.createPDFv2 = async (hs1, hs2, hs3, hs4, hs5, hs6, hs7, hs8) => {
+    const selectedDestinations = [hs1, hs2, hs3, hs4, hs5, hs6, hs7, hs8];
+
+    const pdfUrls = [
+      'https://rebelrooster.io/vg/nurnberg/pdf/Nuremberg_v1__01.pdf',
+      'https://rebelrooster.io/vg/nurnberg/pdf/Nuremberg_v1__02.pdf',
+      'https://rebelrooster.io/vg/nurnberg/pdf/Nuremberg_v1__03.pdf',
+      'https://rebelrooster.io/vg/nurnberg/pdf/Nuremberg_v1__04.pdf',
+      'https://rebelrooster.io/vg/nurnberg/pdf/Nuremberg_v1__05.pdf',
+      'https://rebelrooster.io/vg/nurnberg/pdf/Nuremberg_v1__06.pdf',
+      'https://rebelrooster.io/vg/nurnberg/pdf/Nuremberg_v1__07.pdf',
+      'https://rebelrooster.io/vg/nurnberg/pdf/Nuremberg_v1__08.pdf'
+    ];
+    
+    const coverPageUrl = 'https://rebelrooster.io/vg/nurnberg/pdf/Nuremberg_v1__00.pdf';
+    
+    // Validate input
+    if (selectedDestinations.length !== pdfUrls.length) {
+      console.error('Mismatch between selected destinations and available PDFs');
+      alert('An error occurred while preparing the PDF. Please try again.');
+      return;
+    }
+  
+    // Create an array of selected PDF URLs
+    const selectedPdfUrls = pdfUrls.filter((_, index) => selectedDestinations[index]);
+  
+    try {
+      const response = await fetch('https://node-smartbuilder.vercel.app/combine-pdfs', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          pdfUrls: selectedPdfUrls,
+          coverPageUrl: coverPageUrl
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      a.download = 'Bucket List.pdf';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+      
+      alert('PDF generated successfully!');
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('Failed to generate PDF. Please try again later.');
+    }
+  };
   
     /** 
      * default move animation duration
